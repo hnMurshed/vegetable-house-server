@@ -70,6 +70,15 @@ const run = async () => {
             res.send(result);
         })
 
+        // delete item
+        app.delete('/deleteitem/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = {_id: ObjectId(id)};
+            const result = await itemCollection.deleteOne(query);
+
+            res.send(result);
+        })
+
         // just for test
         app.get('/testmongo', (req, res) => {
             res.send('Mongo testing is successful. It is working')
