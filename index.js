@@ -63,6 +63,13 @@ const run = async () => {
 
         })
 
+        // insert new item
+        app.post('/insertitem', async (req, res) => {
+            const newItem = req.body;
+            const result = await itemCollection.insertOne(newItem);
+            res.send(result);
+        })
+
         // just for test
         app.get('/testmongo', (req, res) => {
             res.send('Mongo testing is successful. It is working')
