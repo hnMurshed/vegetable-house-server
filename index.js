@@ -26,9 +26,11 @@ const run = async () => {
 
         // get all items
         app.get('/items', async (req, res) => {
+            const page = parseInt(req.query.page);
+            const count = parseInt(req.query.count);
             const query = {};
             const cursor = itemCollection.find(query);
-            const items = await cursor.toArray();
+            const items = await cursor.skip(page*count).limit(count).toArray();
 
             res.send(items);
         })
